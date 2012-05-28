@@ -5,5 +5,5 @@ obj
 *.vsp
 *.csproj.VisualState.xml
 TestResult.xml
-_ReSharper.Panda
+_ReSharper.Pandastream
 Panda.1.2.dotCover

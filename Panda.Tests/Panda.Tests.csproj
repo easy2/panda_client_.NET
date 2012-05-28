@@ -81,6 +81,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\JsonSerializerTest.cs" />
     <Compile Include="Core\ServiceRequestTests.cs" />
     <Compile Include="Core\ServiceProxyTests.cs" />
     <Compile Include="Core\ServiceProxyUtilityTests.cs" />

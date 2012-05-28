@@ -1,0 +1,9 @@
+bin
+obj
+*.user
+*.suo
+*.vsp
+*.csproj.VisualState.xml
+TestResult.xml
+_ReSharper.Panda
+Panda.1.2.dotCover

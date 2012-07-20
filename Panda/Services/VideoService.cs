@@ -120,6 +120,16 @@ namespace Panda.Services
         }
 
         /// <summary>
+        /// Get a video encoding by encodingId
+        /// </summary>
+        /// <returns>A video encoding</returns>
+        public VideoEncoding GetVideoEncoding(string encodingId)
+        {
+            return JsonSerializer.Deserialize<VideoEncoding>(
+                _proxy.GetJson(string.Format("encodings/{0}.json", encodingId), EmptyParameterList));
+        }
+
+        /// <summary>
         /// Uploads a video using the provided video URL
         /// </summary>
         /// <param name="videoUrl">The fully qualified url where the video resides</param>

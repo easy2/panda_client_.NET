@@ -12,6 +12,10 @@ namespace Panda.Domain
         public string video_codec { get; set; }
         public string audio_codec { get; set; }
         public string path { get; set; }
+        public int? video_bitrate { get; set; }
+        public int? audio_bitrate { get; set; }
+        public int? audio_channels { get; set; }
+        public int? audio_sample_rate { get; set; }
         public int? thumbnail_position { get; set; }
         public int? height { get; set; }
         public int? width { get; set; }

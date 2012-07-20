@@ -4,6 +4,7 @@ obj
 *.suo
 *.vsp
 *.csproj.VisualState.xml
+*.ncrunchsolution
 TestResult.xml
 _ReSharper.Pandastream
 Panda.1.2.dotCover

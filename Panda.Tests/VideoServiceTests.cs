@@ -95,6 +95,30 @@ namespace Panda.Tests
         }
 
         [Test]
+        public void GetVideoEncoding_EncodingIdSupplied_CallsProxyMethodWithCorrectParameters()
+        {
+            var videoService = GetVideoService();
+            var encodingId = "some_encoding_id";
+
+            videoService.GetVideoEncoding(encodingId);
+
+            _pandaServiceProxy.AssertWasCalled((proxy =>
+                proxy.GetJson(string.Format("encodings/{0}.json", encodingId), new Dictionary<string, string>())));
+        }
+
+        [Test]
+        public void GetVideoEncoding_EncodingIdSupplied_CallsSerializer()
+        {
+            var videoService = GetVideoService();
+            var encodingId = "some_encoding_id";
+
+            videoService.GetVideoEncoding(encodingId);
+
+            _serializer.AssertWasCalled(serializer =>
+                serializer.Deserialize<Panda.Domain.VideoEncoding>(Arg<string>.Is.Anything));
+        }
+
+        [Test]
         public void UploadVideo_VideoUrlSupplied_CallsProxyMethodWithCorrectParameters()
         {
             var videoService = GetVideoService();

@@ -122,11 +122,45 @@ namespace Panda.Services
         /// <summary>
         /// Get a video encoding by encodingId
         /// </summary>
+        /// <param name="encodingId">The video encoding id.</param>
         /// <returns>A video encoding</returns>
         public VideoEncoding GetVideoEncoding(string encodingId)
         {
             return JsonSerializer.Deserialize<VideoEncoding>(
                 _proxy.GetJson(string.Format("encodings/{0}.json", encodingId), EmptyParameterList));
+        }
+
+        /// <summary>
+        /// Retry a failed video encoding
+        /// </summary>
+        /// <param name="encodingId">The video encoding id.</param>
+        /// <returns>True if successful.</returns>
+        public bool RetryVideoEncoding(string encodingId)
+        {
+            var response = _proxy.Post(string.Format("encodings/{0}/retry.json", encodingId), EmptyParameterList);
+            return (response != null) && response.StatusCode == System.Net.HttpStatusCode.OK;
+        }
+
+        /// <summary>
+        /// Cancel a pending video encoding
+        /// </summary>
+        /// <param name="encodingId">The video encoding id.</param>
+        /// <returns>True if successful.</returns>
+        public bool CancelVideoEncoding(string encodingId)
+        {
+            var response = _proxy.Post(string.Format("encodings/{0}/cancel.json", encodingId), EmptyParameterList);
+            return (response != null) && response.StatusCode == System.Net.HttpStatusCode.OK;
+        }
+
+        /// <summary>
+        /// Delete a video encoding
+        /// </summary>
+        /// <param name="encodingId">The video encoding id.</param>
+        /// <returns>True if successful.</returns>
+        public bool DeleteVideoEncoding(string encodingId)
+        {
+            var response = _proxy.Delete(string.Format("encodings/{0}.json", encodingId), EmptyParameterList);
+            return (response != null) && response.StatusCode == System.Net.HttpStatusCode.OK;
         }
 
         /// <summary>
@@ -160,9 +194,8 @@ namespace Panda.Services
         /// <returns>A video</returns>
         public bool DeleteVideo(string videoId)
         {
-            var response = _proxy.Delete(string.Format("videos/{0}.json", videoId),
-                new Dictionary<string, string>());
-            return (response != null) ? response.StatusCode == System.Net.HttpStatusCode.OK : false;
+            var response = _proxy.Delete(string.Format("videos/{0}.json", videoId), EmptyParameterList);
+            return (response != null) && response.StatusCode == System.Net.HttpStatusCode.OK;
         }
 
         /// <summary>
@@ -172,8 +205,7 @@ namespace Panda.Services
         public Cloud GetCloud(string cloudId)
         {
             return JsonSerializer.Deserialize<Cloud>(
-                _proxy.GetJson(string.Format("clouds/{0}.json", cloudId),
-                new Dictionary<string, string>()));
+                _proxy.GetJson(string.Format("clouds/{0}.json", cloudId), EmptyParameterList));
         } 
         #endregion
 

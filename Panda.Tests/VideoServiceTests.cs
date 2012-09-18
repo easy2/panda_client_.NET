@@ -119,6 +119,42 @@ namespace Panda.Tests
         }
 
         [Test]
+        public void RetryVideoEncoding_EncodingIdSupplied_CallsProxyMethodWithCorrectParameters()
+        {
+            var videoService = GetVideoService();
+            var encodingId = "some_encoding_id";
+
+            videoService.RetryVideoEncoding(encodingId);
+
+            _pandaServiceProxy.AssertWasCalled((proxy =>
+                proxy.Post(string.Format("encodings/{0}/retry.json", encodingId), new Dictionary<string, string>())));
+        }
+
+        [Test]
+        public void CancelVideoEncoding_EncodingIdSupplied_CallsProxyMethodWithCorrectParameters()
+        {
+            var videoService = GetVideoService();
+            var encodingId = "some_encoding_id";
+
+            videoService.CancelVideoEncoding(encodingId);
+
+            _pandaServiceProxy.AssertWasCalled((proxy =>
+                proxy.Post(string.Format("encodings/{0}/cancel.json", encodingId), new Dictionary<string, string>())));
+        }
+
+        [Test]
+        public void DeleteVideoEncoding_EncodingIdSupplied_CallsProxyMethodWithCorrectParameters()
+        {
+            var videoService = GetVideoService();
+            var encodingId = "some_encoding_id";
+
+            videoService.DeleteVideoEncoding(encodingId);
+
+            _pandaServiceProxy.AssertWasCalled((proxy =>
+                proxy.Delete(string.Format("encodings/{0}.json", encodingId), new Dictionary<string, string>())));
+        }
+
+        [Test]
         public void UploadVideo_VideoUrlSupplied_CallsProxyMethodWithCorrectParameters()
         {
             var videoService = GetVideoService();
